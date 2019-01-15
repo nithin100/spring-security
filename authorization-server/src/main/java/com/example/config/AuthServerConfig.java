@@ -38,23 +38,30 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory().withClient("stems_app").secret(passwordEncoder.encode("stems_seceret"))
-				.authorizedGrantTypes("authorization_code", "refresh_token")
-				.scopes("read","write")
-				//.autoApprove(true)
-				.redirectUris("https://www.getpostman.com/oauth2/callback")
-				.accessTokenValiditySeconds(2400)
-				.and()
-				.withClient("ui")
-				.authorizedGrantTypes("implicit")
-				.scopes("read")
-				.autoApprove(true)
-				.redirectUris("https://www.getpostman.com/oauth2/callback");
+		clients.inMemory()
+					.withClient("stems_app")
+					.secret(passwordEncoder.encode("stems_seceret"))
+					.authorizedGrantTypes("authorization_code", "refresh_token")
+					.scopes("read", "write")
+					.redirectUris("http://localhost:5000/stems/login")
+					.accessTokenValiditySeconds(2400).and()
+					.withClient("ui")
+					.authorizedGrantTypes("implicit")
+					.scopes("read")
+					.autoApprove(true)
+					.redirectUris("http://localhost:5000/stems/home")
+					.and()
+					.withClient("stems_resource")
+					.secret(passwordEncoder.encode("stems_seceret"))
+					.authorizedGrantTypes("client_credentials", "refresh_token");
 		super.configure(clients);
 	}
 
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-		oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+			oauthServer
+			.tokenKeyAccess("permitAll()")
+			.checkTokenAccess("isAuthenticated()")
+			.passwordEncoder(passwordEncoder);
 	}
 
 }

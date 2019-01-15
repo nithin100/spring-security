@@ -1,0 +1,42 @@
+server:
+  port: 5000
+  servlet:
+    context-path: /stems
+    session:
+      cookie:
+        name: UISESSION
+security:
+  oauth2:
+    sso:
+      login-path: /login
+    client:
+      accessTokenUri: http://localhost:8080/oauth/token
+      userAuthorizationUri: http://localhost:8080/oauth/authorize
+      authorized-grant-types:
+      - implicit
+      pre-established-redirect-uri: http://localhost:5000/stems/home
+      registered-redirect-uri:
+      - http://localhost:5000/stems/home
+      use-current-uri: false
+      clientId: ui
+    resource:
+      user-info-uri: http://localhost:8080/me
+      jwt:
+        keyValue: s1f41234pwqdqkl4l12ghg9853123sd
+spring:
+  security:
+    user:
+      password: none
+  aop:
+    proxy-target-class: true
+zuul:
+  add-proxy-headers: true
+  routes:
+    resource:
+      path: /api/**
+      url: http://localhost:8081/um-webapp-resource-server/
+      sensitive-headers:
+      - Authorization
+    user:
+      path: /user/**
+      url: http://localhost:8081/uaa/user
