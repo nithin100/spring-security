@@ -13,7 +13,7 @@ security:
       accessTokenUri: http://localhost:8080/oauth/token
       userAuthorizationUri: http://localhost:8080/oauth/authorize
       authorized-grant-types:
-      - implicit
+      - implicit 
       pre-established-redirect-uri: http://localhost:5000/stems/home
       registered-redirect-uri:
       - http://localhost:5000/stems/home

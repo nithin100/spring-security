@@ -43,7 +43,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 					.secret(passwordEncoder.encode("stems_seceret"))
 					.authorizedGrantTypes("authorization_code", "refresh_token")
 					.scopes("read", "write")
-					.redirectUris("http://localhost:5000/stems/login")
+					.redirectUris("")
 					.accessTokenValiditySeconds(2400).and()
 					.withClient("ui")
 					.authorizedGrantTypes("implicit")
