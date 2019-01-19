@@ -13,16 +13,15 @@ security:
       accessTokenUri: http://localhost:8080/oauth/token
       userAuthorizationUri: http://localhost:8080/oauth/authorize
       authorized-grant-types:
-      - implicit 
-      pre-established-redirect-uri: http://localhost:5000/stems/home
+      - code      
+      pre-established-redirect-uri: http://localhost:5000/stems/
       registered-redirect-uri:
-      - http://localhost:5000/stems/home
+      - http://localhost:5000/stems/
       use-current-uri: false
-      clientId: ui
+      clientId: stems_app
+      client-secret: stems_secret
     resource:
       user-info-uri: http://localhost:8080/me
-      jwt:
-        keyValue: s1f41234pwqdqkl4l12ghg9853123sd
 spring:
   security:
     user:
@@ -30,13 +29,12 @@ spring:
   aop:
     proxy-target-class: true
 zuul:
-  add-proxy-headers: true
+  #add-proxy-headers: true
   routes:
     resource:
       path: /api/**
       url: http://localhost:8081/um-webapp-resource-server/
       sensitive-headers:
       - Authorization
-    user:
-      path: /user/**
-      url: http://localhost:8081/uaa/user
+      strip-prefix: false
+       

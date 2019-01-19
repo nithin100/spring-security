@@ -12,7 +12,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableOAuth2Sso
-@Order(value=Ordered.HIGHEST_PRECEDENCE)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	public WebSecurityConfig() {
@@ -35,8 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		.antMatchers("/","/login")
+		http
+		.antMatcher("/**")
+		.authorizeRequests()
+		.antMatchers("/","/login","/home")
 		.permitAll()
 		.anyRequest()
 		.authenticated()
@@ -44,9 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.httpBasic()
 		.disable()
 		.formLogin()
-		.disable()
-        .csrf()
-        .disable();
+		.disable();
 		super.configure(http);
 	}
 	

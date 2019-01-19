@@ -15,9 +15,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
+@Order(-100)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private BCryptPasswordEncoder passwordEncoder;
@@ -28,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	@Order(1)
+	//@Order(1)
 	protected UserDetailsService userDetailsService() {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 		manager.createUser(new User("nithin", passwordEncoder.encode("nithin"),
@@ -49,18 +51,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
-
+		
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.requestMatchers()
-		.antMatchers("/login", "/oauth/authorize")
+		http
+		.cors()
+		.disable()
+		.formLogin()
+		.permitAll()
+		.and()
+		.requestMatchers()
+		.antMatchers("/login", "/oauth/authorize","/oauth/token/","oauth/confirm_access")
 		.and()
 		.authorizeRequests()
 		.anyRequest()
 		.authenticated()
 		.and()
-		.formLogin().permitAll()
-		.and().csrf().disable();
+		.httpBasic()
+		.disable()
+		.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 		super.configure(http);
 	}
 

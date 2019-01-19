@@ -1,0 +1,7 @@
+#server:
+#  servlet:
+#    context-path: /uaa
+    
+logging:
+  level:
+    org.springframework.security: DEBUG
