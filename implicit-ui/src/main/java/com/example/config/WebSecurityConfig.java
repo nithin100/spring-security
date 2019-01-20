@@ -13,11 +13,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 @Configuration
 @EnableOAuth2Sso
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	public WebSecurityConfig() {
-		System.out.println("Created bean of web security");
-	}
-	
 		
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -35,7 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		.antMatcher("/**")
+		.requestMatchers()
+		.antMatchers("/**")
+		.and()
 		.authorizeRequests()
 		.antMatchers("/","/login","/home")
 		.permitAll()

@@ -52,7 +52,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 					.secret(passwordEncoder.encode("secret"))
 					.authorizedGrantTypes("authorization_code", "refresh_token")
 					.scopes("write")
-					.redirectUris("http://localhost:5000/stems/")
+					.redirectUris("http://localhost:5000/stems/home")
 					.autoApprove(true)
 					.accessTokenValiditySeconds(2400)
 					.and()
@@ -72,7 +72,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
 			oauthServer.allowFormAuthenticationForClients()
 			.tokenKeyAccess("permitAll()")
-			.checkTokenAccess("permitAll()");
+			.checkTokenAccess("isAuthenticated()");
 	}
 
 }

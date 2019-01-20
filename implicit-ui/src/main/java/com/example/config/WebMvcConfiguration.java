@@ -1,20 +1,23 @@
-/*package com.example.config;
+package com.example.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import javax.annotation.PostConstruct;
 
-@Configuration
-public class WebMvcConfiguration extends WebMvcConfigurationSupport{
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class WebMvcConfiguration {
 	
-	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
-            "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/" };
+	@PostConstruct
+	public void some() {
+		System.out.println("Controller bean created");
+	}
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/stems/**")
-            .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
-    }
-	
-}*/
+	@RequestMapping(value = "/{[path:[^\\\\.]*}")
+	public String redirect() {
+		// Forward to home page so that route is preserved.
+		System.out.println("Hey there!");
+		return "forward:/";
+	}
+
+}
