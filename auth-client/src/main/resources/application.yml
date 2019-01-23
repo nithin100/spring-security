@@ -1,0 +1,31 @@
+server:
+  port: 5000
+  servlet:
+    context-path: /stems
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:8080/uaa/oauth/token
+      userAuthorizationUri: http://localhost:8080/uaa/oauth/authorize
+      clientId: authserver
+      client-secret: passwordforauthserver
+    resource:
+      user-info-uri: http://localhost:8080/uaa/user
+spring:
+  security:
+    user:
+      password: none  
+  aop:
+    proxy-target-class: true
+zuul:
+  routes:
+    resource:
+      path: /api/**
+      url: http://localhost:8081/resource/api/
+      sensitive-headers:
+    user:
+      path: /user/**
+      url: http://localhost:8080/uaa/user
+      sensitive-headers:
+           
+       

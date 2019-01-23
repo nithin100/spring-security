@@ -1,6 +1,7 @@
 package com.example.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +16,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
+@Order(6)
 public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	private BCryptPasswordEncoder passwordEncoder;
@@ -48,11 +50,11 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-					.withClient("stems_app")
-					.secret(passwordEncoder.encode("secret"))
+					.withClient("authserver")
+					.secret(passwordEncoder.encode("passwordforauthserver"))
 					.authorizedGrantTypes("authorization_code", "refresh_token")
 					.scopes("write")
-					.redirectUris("http://localhost:5000/stems/home")
+					.redirectUris("http://localhost:5000/stems/")
 					.autoApprove(true)
 					.accessTokenValiditySeconds(2400)
 					.and()

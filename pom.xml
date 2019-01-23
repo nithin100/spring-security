@@ -23,7 +23,7 @@
 	<modules>
 		<module>authorization-server</module>
     <module>resource-server</module>
-    <module>implicit-ui</module>
+    <module>auth-client</module>
     <module>web-client</module>
   </modules>
 

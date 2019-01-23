@@ -18,8 +18,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
-@EnableWebSecurity
-@Order(-100)
+@Order(1)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private BCryptPasswordEncoder passwordEncoder;
@@ -55,21 +54,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		.cors()
-		.disable()
-		.formLogin()
-		.permitAll()
-		.and()
 		.requestMatchers()
 		.antMatchers("/login", "/oauth/authorize","/oauth/token/","oauth/confirm_access")
 		.and()
 		.authorizeRequests()
 		.anyRequest()
-		.authenticated()
+		.authenticated()		
 		.and()
-		.httpBasic()
-		.disable()
-		.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+		.formLogin()
+		.permitAll()
+		.and()
+		.csrf();
 		super.configure(http);
 	}
 

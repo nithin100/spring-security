@@ -1,6 +1,8 @@
-#server:
-#  servlet:
-#    context-path: /uaa
+
+server:
+  servlet:
+    context-path: /uaa
+  port: 8080
     
 logging:
   level:

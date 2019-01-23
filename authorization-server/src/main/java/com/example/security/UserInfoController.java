@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class UserInfoController {
 	
-	@GetMapping("me")
+	@GetMapping("user")
 	public Principal user(Principal principal) {
 		System.out.println("Incoming request for principal: ");
 		return principal;
