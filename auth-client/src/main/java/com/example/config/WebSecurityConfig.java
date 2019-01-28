@@ -21,7 +21,7 @@ public class WebSecurityConfig
         throws Exception {
         http.antMatcher("/**")
             .authorizeRequests()
-            .antMatchers("/", "/webjars/**")
+            .antMatchers("/","/app/**","/webjars/**")
             .permitAll()
             .anyRequest()
             .authenticated()

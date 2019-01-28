@@ -30,9 +30,9 @@ public class AuthClient extends WebSecurityConfigurerAdapter {
 	    return new SimpleFilter();
 	 } 
 	
-	@GetMapping("/")
-	public String hello() {
-		return "Hello world";
-	}
+//	@GetMapping("/")
+//	public String hello() {
+//		return "Hello world";
+//	}
 
 }

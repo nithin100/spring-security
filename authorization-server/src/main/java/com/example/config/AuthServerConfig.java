@@ -50,8 +50,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-					.withClient("authserver")
-					.secret(passwordEncoder.encode("passwordforauthserver"))
+					.withClient("stems_app")
+					.secret(passwordEncoder.encode("stems_key"))
 					.authorizedGrantTypes("authorization_code", "refresh_token")
 					.scopes("write")
 					.redirectUris("http://localhost:5000/stems/")

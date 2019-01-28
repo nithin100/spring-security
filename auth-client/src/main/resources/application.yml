@@ -7,8 +7,8 @@ security:
     client:
       accessTokenUri: http://localhost:8080/uaa/oauth/token
       userAuthorizationUri: http://localhost:8080/uaa/oauth/authorize
-      clientId: authserver
-      client-secret: passwordforauthserver
+      clientId: stems_app
+      client-secret: stems_key
     resource:
       user-info-uri: http://localhost:8080/uaa/user
 spring:

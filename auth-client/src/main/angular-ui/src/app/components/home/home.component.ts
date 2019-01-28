@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     console.log('loading home page');
-    //this.http.get('http://localhost:8081/um-webapp-resource-server/api/users').subscribe();
+    this.http.get('/api/hello').subscribe();
   }
 
 }
