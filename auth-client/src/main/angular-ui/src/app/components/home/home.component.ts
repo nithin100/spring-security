@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     console.log('loading home page');
-    this.http.get('/api/hello').subscribe();
+    this.http.get('/stems/api/hello').subscribe();
   }
 
 }

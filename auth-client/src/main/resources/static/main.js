@@ -238,7 +238,7 @@ var HomeComponent = /** @class */ (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
         console.log('loading home page');
-        this.http.get('/api/hello').subscribe();
+        this.http.get('/stems/api/hello').subscribe();
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

@@ -21,7 +21,7 @@ public class WebSecurityConfig
 
     @Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/**/*.js");
+		web.ignoring().antMatchers("/**/*.js","/**/*.js.**","/**/favicon.ico");
 		super.configure(web);
 	}
 
