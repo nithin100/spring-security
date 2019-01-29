@@ -10,6 +10,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private http:HttpClient) { }
 
+  greeting = "hey there";
+
   ngOnInit() {
     console.log('loading home page');
     this.http.get('/api/hello').subscribe();

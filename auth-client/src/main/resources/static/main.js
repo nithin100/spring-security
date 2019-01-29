@@ -204,7 +204,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  home works!\n</p>\n"
+module.exports = "<p>\n{{greeting}}\n</p>\n"
 
 /***/ }),
 
@@ -234,6 +234,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var HomeComponent = /** @class */ (function () {
     function HomeComponent(http) {
         this.http = http;
+        this.greeting = "hey there";
     }
     HomeComponent.prototype.ngOnInit = function () {
         console.log('loading home page');
