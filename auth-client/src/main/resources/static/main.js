@@ -238,7 +238,31 @@ var HomeComponent = /** @class */ (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
         console.log('loading home page');
-        this.http.get('/stems/api/hello').subscribe();
+        if (this.isAuthenticated()) {
+            this.http.get('/stems/api/hello').subscribe(function (res) {
+                if (res) {
+                    console.log(res);
+                }
+            }, function (err) {
+                console.log('error occured please login');
+            });
+        }
+        else {
+            console.log('Unauthenticated request');
+            console.log('Uncomment the below code for handling redirections');
+            //window.location.href='/login';
+        }
+    };
+    HomeComponent.prototype.isAuthenticated = function () {
+        var that = this;
+        this.http.get('/stems/user').subscribe(function (res) {
+            if (res) {
+                that.authentication = true;
+            }
+        }, function (err) {
+            that.authentication = false;
+        });
+        return that.authentication;
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
