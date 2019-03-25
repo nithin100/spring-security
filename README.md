@@ -42,4 +42,9 @@ Important and ofcourse the central part is authorization-server. This is the ser
 Few important things to note here are that if you have to integrate a client application with the authorization server it should be registered providing redirection uri, client-id and secret. This data in this example is stored inmemory so as user details. There are only two valid users who have usernames and passwords (uname: nithin & password: nithin, uname: admin & password: admin).
 Once a user is successfully authenticated a new session gets created on the client side. This session has access token and whenever a request is made by the client application this session gets passed to the authorization server (taken care by server which is hosting the client application).  This is how authorization server will know if the request is a authenticated request or an unautheticated one. If it is not authenticated then client application should redirect user to the login page running on the authorization server.
 authorization-server is also having an important resource/endpoint which is used by all resource-servers to validate if a request is authenticated or not. This end point is called as user-info-uri which returns the princpal. This information is essential for a resource server to validate a request. This validation is done for every request that reaches a resource server (a nice fit for caching). The response from the user-info-endpoint has details like username, access-token, user-roles etc which can be used by client applications (may be for handling a role based ui implementation). 
+
+####### References #######
+https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type
+https://auth0.com/docs/api-auth/which-oauth-flow-to-use
+https://projects.spring.io/spring-security-oauth/docs/oauth2.html
  
