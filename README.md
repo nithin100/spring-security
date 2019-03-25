@@ -44,7 +44,10 @@ Once a user is successfully authenticated a new session gets created on the clie
 authorization-server is also having an important resource/endpoint which is used by all resource-servers to validate if a request is authenticated or not. This end point is called as user-info-uri which returns the princpal. This information is essential for a resource server to validate a request. This validation is done for every request that reaches a resource server (a nice fit for caching). The response from the user-info-endpoint has details like username, access-token, user-roles etc which can be used by client applications (may be for handling a role based ui implementation). 
 
 ####### References #######
+
 https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type
+
 https://auth0.com/docs/api-auth/which-oauth-flow-to-use
+
 https://projects.spring.io/spring-security-oauth/docs/oauth2.html
  
