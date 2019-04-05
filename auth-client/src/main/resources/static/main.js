@@ -204,7 +204,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n{{greeting}}\n</p>\n"
+module.exports = "<p>\n{{greeting}}\n\n<button (click)=\"helloWorld()\"> Make a secured api call </button>\n\n</p>\n"
 
 /***/ }),
 
@@ -238,31 +238,40 @@ var HomeComponent = /** @class */ (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
         console.log('loading home page');
-        if (this.isAuthenticated()) {
-            this.http.get('/stems/api/hello').subscribe(function (res) {
-                if (res) {
-                    console.log(res);
-                }
+        console.log('isAuthenticated? ' + this.isAuthenticated());
+    };
+    HomeComponent.prototype.helloWorld = function () {
+        var _this = this;
+        this.isAuthenticated().then(function (resolved) {
+            _this.http.get('/stems/api/hello', { responseType: 'text' }).subscribe(function (res) {
+                console.log(resolved);
+                console.log(res);
             }, function (err) {
+                console.log(resolved);
+                console.log(err);
                 console.log('error occured please login');
             });
-        }
-        else {
+        }, function (rejected) {
             console.log('Unauthenticated request');
-            console.log('Uncomment the below code for handling redirections');
-            //window.location.href='/login';
-        }
+            console.log('Redirecting to authorizations-server\'s login page');
+            console.log(rejected);
+            window.location.href = '/stems/login';
+        });
     };
     HomeComponent.prototype.isAuthenticated = function () {
         var that = this;
-        this.http.get('/stems/user').subscribe(function (res) {
-            if (res) {
-                that.authentication = true;
-            }
-        }, function (err) {
-            that.authentication = false;
+        console.log('requesting user endpoint');
+        return new Promise(function (resolve, reject) {
+            that.http.get('/stems/user').subscribe(function (res) {
+                if (res) {
+                    console.log(res);
+                    resolve(res);
+                }
+            }, function (err) {
+                console.log(err);
+                reject(err);
+            });
         });
-        return that.authentication;
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
